@@ -34,6 +34,73 @@ public class LogAnalyzer
             hourCounts[hour]++;
         }
     }
+    
+    /**
+     * Return the number of accesses recorded in the log file.
+     */
+    public int numberOfAccesses() {
+        int total = 0;
+        for(int num = 0; num < hourCounts.length; num++) {
+            total += hourCounts[num];
+        }
+        
+        return total;
+    }
+    
+    /**
+     * Find the busiest hour
+     * Return the busiest hour
+     */
+    public void busiestHour() {
+        int maxCount = 0;
+        int busiestHour = 0;
+        for(int hour = 0; hour < hourCounts.length; hour++) {
+            if(hourCounts[hour] > maxCount) {
+                busiestHour = hour;
+                maxCount = hourCounts[hour];
+            }
+        } 
+        
+        //return busiestHour;
+        
+    }
+    
+    /**
+     * Find the quietest hour
+     * Return the quietest hour
+     */
+    public void quietestHour() {
+        int minCount = numberOfAccesses();
+        int quietestHour = 0;
+        for(int hour = 0; hour < hourCounts.length; hour++) {
+            if(hourCounts[hour] < minCount) {
+                quietestHour = hour;
+                minCount = hourCounts[hour];
+            }
+        } 
+        
+        //return quietestHour;
+        
+    }
+    
+    /**
+     * Find the busiest two hour
+     * Return the busiest two hour
+     */
+    public void busiestTwoHour() {
+        int maxCount = 0;
+        int busiestTwoHour = 0;
+        for(int hour = 0; hour < hourCounts.length/2; hour++) {
+            int hourPair = hourCounts[hour * 2] + hourCounts[hour * 2 + 1];
+            if (hourPair > maxCount) {
+                busiestTwoHour = hour;
+            }
+        }
+         
+        
+        //return busiestTwoHour;
+        
+    }
 
     /**
      * Print the hourly counts.
@@ -47,6 +114,7 @@ public class LogAnalyzer
             System.out.println(hour + ": " + hourCounts[hour]);
         }
     }
+    
     
     /**
      * Print the lines of data read by the LogfileReader
