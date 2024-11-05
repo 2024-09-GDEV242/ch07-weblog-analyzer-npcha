@@ -8,6 +8,10 @@ public class LogAnalyzer
 {
     // Where to calculate the hourly access counts.
     private int[] hourCounts;
+    // Where to calculate the month access counts.
+    private int[] monthlyCounts;
+    // Where to calculate the week access counts.
+    private int[] dayCounts;
     // Use a LogfileReader to access the data.
     private LogfileReader reader;
 
@@ -19,6 +23,10 @@ public class LogAnalyzer
         // Create the array object to hold the hourly
         // access counts.
         hourCounts = new int[24];
+        // Create the array object to hold the monthly
+        monthlyCounts = new int[12];
+        // Create the array object to hold the daily
+        dayCounts = new int[28];
         // Create the reader to obtain the data.
         reader = new LogfileReader("demo.log");
     }
@@ -48,6 +56,26 @@ public class LogAnalyzer
     }
     
     /**
+     * Return the total access per month
+     */
+    public int totalAccessesPerMonth() {
+        int totalPerMonth = 0;
+        for(int num = 0; num < monthlyCounts.length; num++) {
+            totalPerMonth += monthlyCounts[num];
+        }
+        
+        return totalPerMonth;
+    }
+    
+    /**
+     * Return the average access per month 
+     */
+    public int averageAccessesPerMonth() {
+        int totalAvgPerMonth = totalAccessesPerMonth();
+        return (int) totalAvgPerMonth / monthlyCounts.length;
+    }
+    
+    /**
      * Find the busiest hour
      * Return the busiest hour
      */
@@ -66,6 +94,42 @@ public class LogAnalyzer
     }
     
     /**
+     * Find the busiest day
+     * Return the busiest day
+     */
+    public void busiestDay() {
+        int maxCount = 0;
+        int busiestDay = 0;
+        for(int day = 0; day < dayCounts.length; day++) {
+            if(dayCounts[day] > maxCount) {
+                busiestDay = day;
+                maxCount = dayCounts[day];
+            }
+        } 
+        
+        //return busiestDay;
+        
+    }
+    
+    /**
+     * Find the busiest month
+     * Return the busiest month
+     */
+    public void busiestMonth() {
+        int maxCount = 0;
+        int busiestMonth = 0;
+        for(int month = 0; month < monthlyCounts.length; month++) {
+            if(monthlyCounts[month] > maxCount) {
+                busiestMonth = month;
+                maxCount = monthlyCounts[month];
+            }
+        } 
+        
+        //return busiestMonth;
+        
+    }
+    
+    /**
      * Find the quietest hour
      * Return the quietest hour
      */
@@ -76,6 +140,42 @@ public class LogAnalyzer
             if(hourCounts[hour] < minCount) {
                 quietestHour = hour;
                 minCount = hourCounts[hour];
+            }
+        } 
+        
+        //return quietestHour;
+        
+    }
+    
+    /**
+     * Find the quietest day
+     * Return the quietest day
+     */
+    public void quietestDay() {
+        int minCount = numberOfAccesses();
+        int quietestDay = 0;
+        for(int day = 0; day < dayCounts.length; day++) {
+            if(hourCounts[day] < minCount) {
+                quietestDay = day;
+                minCount = dayCounts[day];
+            }
+        } 
+        
+        //return quietestHour;
+        
+    }
+    
+    /**
+     * Find the quietest month
+     * Return the quietest month
+     */
+    public void quietestMonth() {
+        int minCount = numberOfAccesses();
+        int quietestMonth = 0;
+        for(int month = 0; month < monthlyCounts.length; month++) {
+            if(monthlyCounts[month] < minCount) {
+                quietestMonth = month;
+                minCount = monthlyCounts[month];
             }
         } 
         
