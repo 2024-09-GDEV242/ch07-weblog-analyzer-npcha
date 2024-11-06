@@ -161,7 +161,7 @@ public class LogAnalyzer
             }
         } 
         
-        //return quietestHour;
+        //return quietestDay;
         
     }
     
@@ -179,7 +179,7 @@ public class LogAnalyzer
             }
         } 
         
-        //return quietestHour;
+        //return quietestMonth;
         
     }
     
@@ -197,7 +197,6 @@ public class LogAnalyzer
             }
         }
          
-        
         //return busiestTwoHour;
         
     }
